@@ -9,12 +9,12 @@ if (POLICY CMP0141)
   set(CMAKE_MSVC_DEBUG_INFORMATION_FORMAT "$<IF:$<AND:$<C_COMPILER_ID:MSVC>,$<CXX_COMPILER_ID:MSVC>>,$<$<CONFIG:Debug,RelWithDebInfo>:EditAndContinue>,$<$<CONFIG:Debug,RelWithDebInfo>:ProgramDatabase>>")
 endif()
 
-set(CMAKE_TOOLCHAIN_FILE "$ENV{VCPKG_ROOT}/scripts/buildsystems/vcpkg.cmake"
+set( VCPKG_ROOT "$ENV{VCPKG_ROOT}" CACHE FILEPATH "Path to the rootfolder to vcpkg")
+set(CMAKE_TOOLCHAIN_FILE "${VCPKG_ROOT}/scripts/buildsystems/vcpkg.cmake"
 	CACHE STRING "Vcpkg toolchain file")
 
 project ("p43_cm")
 
-set( EPANET_ROOT "$ENV{EPANET_ROOT}" CACHE FILEPATH "Path to the rootfolder to EPANET")
 
 # Include sub-projects.
 add_subdirectory ("Pagmo4EPANET_CMake")

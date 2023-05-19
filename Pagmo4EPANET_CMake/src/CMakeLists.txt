@@ -1,3 +1,5 @@
+set( EPANET_ROOT "$ENV{EPANET_ROOT}" CACHE FILEPATH "Path to the rootfolder to EPANET")
+
 IF(WIN32)
 	add_library(epanet SHARED IMPORTED )
 	set_property(TARGET epanet PROPERTY
