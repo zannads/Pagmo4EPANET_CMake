@@ -79,7 +79,7 @@ std::vector<std::vector<double>> runHydraulics(EN_Project ph) {
 
         // run this timestep
         err = EN_runH(ph, &t);
-        _ASSERT(err < 100);
+        //_ASSERT(err < 100);
 
         if (err)
             if (err >= 100) {
@@ -90,7 +90,7 @@ std::vector<std::vector<double>> runHydraulics(EN_Project ph) {
 
         // move the simulator onto the next timestep
         err = EN_nextH(ph, &tStep);
-        _ASSERT(err < 100);
+        //_ASSERT(err < 100);
 
 
         // check to see if this was a scheduled timestep - 
@@ -102,7 +102,7 @@ std::vector<std::vector<double>> runHydraulics(EN_Project ph) {
             std::vector<double> tmp_pressures(nNodes);
             for (int nodeIdx = nNodes; nodeIdx; --nodeIdx) {
                 err = EN_getnodevalue(ph, nodeIdx, EN_PRESSURE, &tmp_pressures[nodeIdx - 1]);
-                _ASSERT(err < 100);
+                //_ASSERT(err < 100);
             }
 
             pressures.push_back(tmp_pressures);
@@ -162,9 +162,9 @@ std::vector<double> NET1sim(std::vector<double>& dv) {
     double pipeDiam;
     for (int i = 0; i < pipeIds2check.size(); ++i) {
         err = EN_getlinkindex(ph, pipeIds2check[i], &idx);
-        _ASSERT(err < 100);
+        //_ASSERT(err < 100);
         err = EN_getlinkvalue(ph, idx, EN_DIAMETER, &pipeDiam);
-        _ASSERT(err < 100);
+        //_ASSERT(err < 100);
 
         cumDiam += pipeDiam;
     }
