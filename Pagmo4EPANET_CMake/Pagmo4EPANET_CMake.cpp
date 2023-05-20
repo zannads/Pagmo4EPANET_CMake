@@ -1,5 +1,6 @@
-﻿// Pagmo4EPANET_CMake.cpp : Defines the entry point for the application.
+// Pagmo4EPANET_CMake.cpp : Defines the entry point for the application.
 //
+#include <chrono>
 
 #include "Pagmo4EPANET_CMake.h"
 
@@ -49,13 +50,20 @@ struct problem_NET1 {
 
 int main()
 {
+    using std::chrono::high_resolution_clock;
+    using std::chrono::duration_cast;
+    using std::chrono::duration;
+    using std::chrono::milliseconds;
+
+    auto t1 = high_resolution_clock::now();
+    
     try {
         //Construct a pagmo::problem for NET1
         problem p{ problem_NET1{} };
         unsigned int seed = 3;
 
         // Instantiate nsga2
-        algorithm algo{ nsga2(100) };
+        algorithm algo{ nsga2(1000) };
         algo.set_seed(seed);
 
         // Instantiate population 
@@ -74,7 +82,15 @@ int main()
         std::cout << e.what();
     }
 
+    auto t2 = high_resolution_clock::now();
+    /* Getting number of milliseconds as an integer. */
+       // auto ms_int = duration_cast<milliseconds>(t2 - t1);
 
+        /* Getting number of milliseconds as a double. */
+        duration<double, std::milli> ms_double = t2 - t1;
+
+        //std::cout << ms_int.count() << "ms\n";
+        std::cout << ms_double.count() << "ms\n";
 
     /*vector_double pop = {1., 2., 3.};
     try {
