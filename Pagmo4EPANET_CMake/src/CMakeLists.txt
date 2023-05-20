@@ -24,6 +24,13 @@ IF(APPLE)
 						 )
 ENDIF(APPLE)
 
+IF(LINUX)
+	add_library(epanet SHARED IMPORTED)
+	set_target_properties(epanet PROPERTIES
+				IMPORTED_LOCATION "${EPANET_ROOT}/build/lib/libepanet2.so"
+				)
+ENDIF(LINUX)
+
 add_library(Stuff "logger.cpp" "NET1.cpp")
 
 target_link_libraries(Stuff PUBLIC Pagmo::pagmo epanet)
